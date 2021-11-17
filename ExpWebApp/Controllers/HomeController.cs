@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+
 using ExpWebApp.Models;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExpWebApp.Controllers
 {
@@ -15,23 +14,21 @@ namespace ExpWebApp.Controllers
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult ValidateForm(ValidateModel frm)
         {
-            ViewData["Message"] = "Your application description page.";
+            if (ModelState.IsValid)
+            {
+                var calcController = new CalculateController();
 
-            return View();
-        }
+                ActionResult content = calcController.CalcDate(frm.myDate, frm.myDays);
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+                return content;
 
-            return View();
-        }
+            }
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View("Index");
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -39,5 +36,7 @@ namespace ExpWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
+
