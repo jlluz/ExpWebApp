@@ -7,31 +7,31 @@ namespace ExpWebApp.Controllers
     public class CalculateController : Controller
     {
         [HttpPost]
-        public ActionResult CalcDate(DateTime myDate, int myDays)
+        public ActionResult CalcDate(DateTime MyDate, int MyDays)
         {
-            DateTime myNewDate = CalcNewDate(myDate, myDays);
+            DateTime myNewDate = CalcNewDate(MyDate, MyDays);
 
-            return Content(myDate + " + " + myDays + " days = " + myNewDate.Day + "/" + myNewDate.Month + "/" + myNewDate.Year);
+            return Content(MyDate + " + " + MyDays + " days = " + myNewDate.Day + "/" + myNewDate.Month + "/" + myNewDate.Year);
         }
 
-        public DateTime CalcNewDate(DateTime myDate, int myDays)
+        public DateTime CalcNewDate(DateTime MyDate, int MyDays)
         {
-            int myDateYear = myDate.Year;
-            int myDateMonth = myDate.Month;
-            int myDateDay = myDate.Day;
+            int MyDateYear = MyDate.Year;
+            int MyDateMonth = MyDate.Month;
+            int MyDateDay = MyDate.Day;
 
-            int myTotalDays = myDays;
+            int myTotalDays = MyDays;
 
             while (myTotalDays >= 365)
             {
-                myDateYear += 1;
+                MyDateYear += 1;
 
-                myTotalDays -= IsLeapYear(myDateYear) ? 366 : 365;
+                myTotalDays -= IsLeapYear(MyDateYear) ? 366 : 365;
             }
 
             while (myTotalDays > 0)
             {
-                switch (myDateMonth)
+                switch (MyDateMonth)
                 {
                     case 1:
                     case 3:
@@ -41,14 +41,14 @@ namespace ExpWebApp.Controllers
                     case 10:
                         if (myTotalDays >= 31)
                         {
-                            CalcMonth(ref myTotalDays, ref myDateMonth, 31);
+                            CalcMonth(ref myTotalDays, ref MyDateMonth, 31);
                         }
                         else
                         {
-                            CalcDays(ref myTotalDays, ref myDateDay);
-                            if (myDateDay > 31)
+                            CalcDays(ref myTotalDays, ref MyDateDay);
+                            if (MyDateDay > 31)
                             {
-                                CalcDay(ref myDateDay, ref myDateMonth);
+                                CalcDay(ref MyDateDay, ref MyDateMonth);
                             }
                         }
                         break;
@@ -57,47 +57,47 @@ namespace ExpWebApp.Controllers
                         if (myTotalDays >= 31)
                         {
                             myTotalDays -= 31;
-                            myDateYear += 1;
-                            myDateMonth = 1;
+                            MyDateYear += 1;
+                            MyDateMonth = 1;
                         }
                         else
                         {
-                            CalcDays(ref myTotalDays, ref myDateDay);
-                            if (myDateDay > 31)
+                            CalcDays(ref myTotalDays, ref MyDateDay);
+                            if (MyDateDay > 31)
                             {
-                                myDateDay = 1;
-                                myDateMonth = 1;
-                                myDateYear = 1;
+                                MyDateDay = 1;
+                                MyDateMonth = 1;
+                                MyDateYear = 1;
                             }
 
                         }
                         break;
 
                     case 2:
-                        if (IsLeapYear(myDateYear))
+                        if (IsLeapYear(MyDateYear))
                         {
                             if (myTotalDays >= 29)
                             {
-                                CalcMonth(ref myTotalDays, ref myDateMonth, 29);
+                                CalcMonth(ref myTotalDays, ref MyDateMonth, 29);
                             }
                         }
                         else if (myTotalDays >= 28)
                         {
-                            CalcMonth(ref myTotalDays, ref myDateMonth, 28);
+                            CalcMonth(ref myTotalDays, ref MyDateMonth, 28);
                         }
                         else
                         {
-                            CalcDays(ref myTotalDays, ref myDateDay);
-                            if (IsLeapYear(myDateYear))
+                            CalcDays(ref myTotalDays, ref MyDateDay);
+                            if (IsLeapYear(MyDateYear))
                             {
-                                if (myDateDay > 29)
+                                if (MyDateDay > 29)
                                 {
-                                    CalcDay(ref myDateDay, ref myDateMonth);
+                                    CalcDay(ref MyDateDay, ref MyDateMonth);
                                 }
                             }
-                            else if (myDateDay > 28)
+                            else if (MyDateDay > 28)
                             {
-                                CalcDay(ref myDateDay, ref myDateMonth);
+                                CalcDay(ref MyDateDay, ref MyDateMonth);
                             }
 
                         }
@@ -109,14 +109,14 @@ namespace ExpWebApp.Controllers
                     case 11:
                         if (myTotalDays >= 30)
                         {
-                            CalcMonth(ref myTotalDays, ref myDateMonth, 30);
+                            CalcMonth(ref myTotalDays, ref MyDateMonth, 30);
                         }
                         else
                         {
-                            CalcDays(ref myTotalDays, ref myDateDay);
-                            if (myDateDay > 30)
+                            CalcDays(ref myTotalDays, ref MyDateDay);
+                            if (MyDateDay > 30)
                             {
-                                CalcDay(ref myDateDay, ref myDateMonth);
+                                CalcDay(ref MyDateDay, ref MyDateMonth);
                             }
                         }
                         break;
@@ -124,7 +124,7 @@ namespace ExpWebApp.Controllers
 
             }
 
-            return new DateTime(myDateYear, myDateMonth, myDateDay);
+            return new DateTime(MyDateYear, MyDateMonth, MyDateDay);
 
         }
 
@@ -142,26 +142,26 @@ namespace ExpWebApp.Controllers
         }
 
 
-        void CalcMonth(ref int myTotalDays, ref int myDateMonth, int days)
+        void CalcMonth(ref int myTotalDays, ref int MyDateMonth, int days)
         {
             myTotalDays -= days;
-            myDateMonth += 1;
+            MyDateMonth += 1;
 
         }
 
 
-        void CalcDay(ref int myDateDay, ref int myDateMonth)
+        void CalcDay(ref int MyDateDay, ref int MyDateMonth)
         {
-            myDateDay = 1;
-            myDateMonth += 1;
+            MyDateDay = 1;
+            MyDateMonth += 1;
 
         }
 
 
-        void CalcDays(ref int myTotalDays, ref int myDateDay)
+        void CalcDays(ref int myTotalDays, ref int MyDateDay)
         {
             myTotalDays -= 1;
-            myDateDay += 1;
+            MyDateDay += 1;
 
         }
     }

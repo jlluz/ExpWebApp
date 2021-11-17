@@ -1,4 +1,5 @@
 ﻿@model ExpWebApp.Models.ValidateModel
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,13 +12,15 @@
         <div class="row input-sm">
             <div class="col-md-6">
                 <label>Please select a date:</label>
-                <input type="date" name="myDate" />
+                <input type="date" name="MyDate" />
+                @Html.ValidationMessage("MyDate")
             </div>
         </div>
         <div class="row input-sm">
             <div class="col-md-6">
                 <label>Please input days:</label>
-                <input type="number" name="myDays" placeholder="number of days" />
+                <input type="number" name="MyDays" placeholder="number of days" />
+                @Html.ValidationMessage("MyDays")
             </div>
         </div>
         <div class="row">

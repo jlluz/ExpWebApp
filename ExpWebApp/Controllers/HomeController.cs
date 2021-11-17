@@ -21,7 +21,7 @@ namespace ExpWebApp.Controllers
             {
                 var calcController = new CalculateController();
 
-                ActionResult content = calcController.CalcDate(frm.myDate, frm.myDays);
+                ActionResult content = calcController.CalcDate(frm.MyDate, frm.MyDays);
 
                 return content;
 
